@@ -1,5 +1,5 @@
 .profile-info__edit-button{
-    background: url("../../../images/Edit_Button.svg");
+    background: url("../../../images/edit_button.svg");
     min-width: 24px; /*именно так, потому что при переполнении часть кнопки вылезает за пределы блока */
     min-height: 24px;
     background-repeat: no-repeat;

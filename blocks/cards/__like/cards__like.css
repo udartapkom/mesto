@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
+    background-size: contain;
 }
 .cards__like:hover{
     opacity: .6;

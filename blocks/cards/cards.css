@@ -10,4 +10,5 @@
     max-width: 100%; 
     background: #FFFFFF;
     border-radius: 10px;
+    overflow: hidden;
 }
