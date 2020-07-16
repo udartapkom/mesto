@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/style.css">
+  <meta name="description" content="Четвертый самостоятельный проект на Яндекс практикуме">
+  <meta name="author" content="Попов Роман">
+  <title>Проект Место</title>
+  </head>
+  <body class="body">
+      <header class="header">
+          <div class="header__logo"></div>
+          <div class="header__line"></div> 
+      </header>
+    <main class="content">
+        <section class="profile">
+            <img class="profile__avatar" src="images/kusto.jpg" alt="Жак-Ив Кусто">
+            <div class="profile-info">
+                <div class="profile-info__name">
+                    <h1 class="profile-info__title profile-info__title_text_ellipsis">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile-info__edit-button"></button>
+                </div>
+                <p class="profile-info__subtitle profile-info__title_text_ellipsis">Исследователь океана</p>
+            </div>
+            <button type="button" class="profile__add-button"></button>
+        </section>
+        <section class="elements">
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/karachaevsk.png" alt="Карачаевск">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Карачаевск</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/elbrus.png" alt="Гора Эльбрус">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Гора Эльбрус</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/dombay.png" alt="Домбай">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Домбай</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/elbrus.png" alt="Гора Эльбрус">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Гора Эльбрус</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/dombay.png" alt="Домбай">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Домбай</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+            <div class="cards">
+                <img class="cards__photo" src="images/foto/karachaevsk.png" alt="Карачаевск">
+                <div class="cards__title">
+                    <h2 class="cards__title-style cards__title_text_ellipsis">Карачаево-Черкесия</h2>
+                    <button type="button" class="cards__like"></button>
+                </div>
+            </div>
+       </section>
+    </main>
+    <footer class="footer">
+        <h2 class="footer__copyright">&copy; 2020 Mesto Russia</h2>
+    </footer>
+<div class="modal">
+
+<div class="modal__content">
+    <button type="button" class="modal__close-button"></button>
+    <h2 class="modal__header">Редактировать профиль</h2>
+    <form action="#" class="modal__form">
+        <input type="text" value="" class="modal__input modal__input_name"> <!-- добавлен несуществующий класс "modal__input_name" для корретного поиска querySelector-->
+        <input type="text" value="" class="modal__input modal__input_profession"> <!-- добавлен несуществующий класс "modal__input_profession" для корретного поиска querySelector-->
+        <button type="submit" class="modal__save">Сохранить</button>
+    </form>
+</div>
+
+</div>
+<script src="/script/idex.js"></script>
+  </body>
+</html>
