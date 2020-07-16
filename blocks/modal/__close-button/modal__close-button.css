@@ -14,7 +14,7 @@
     opacity: .6;
     transition: linear .3s; 
 }
-@media screen and (max-width: 320px){
+@media screen and (max-width: 480px){
     .modal__close-button{
         right: 0;
     }

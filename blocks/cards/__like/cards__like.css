@@ -10,3 +10,6 @@
     opacity: .6;
     transition: linear .3s; 
 }
+.cards__like:focus{
+    outline: none;
+}
