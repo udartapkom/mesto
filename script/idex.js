@@ -77,9 +77,9 @@ const modalOpen = (swichModal) => {
         modalProfession.value = '';
         modalProfession.placeholder = "Ссылка на картинку";
         
-        submitButton.addEventListener("submit", modalMestoSave = event =>{
+        submitButton.addEventListener("click", modalMestoSave = event =>{
             event.preventDefault(); 
-            submitButton.addEventListener("submit");
+           // submitButton.addEventListener("submit");
             const item = cardsGenerate({
                       name: modalName.value,
                       link: modalProfession.value 
@@ -118,12 +118,12 @@ function modalToggle(){
         }
     } 
 
- function modalProfileSave(event){
+ /* function modalProfileSave(event){
     event.preventDefault(); 
     profileName.textContent = modalName.value;
     profileProfession.textContent = modalProfession.value;
     modalToggle(); 
-}  
+}   */
 
 /* function modalMestoSave(event){
     event.preventDefault(); 
