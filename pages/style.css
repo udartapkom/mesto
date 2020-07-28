@@ -12,3 +12,5 @@
 @import url("../blocks/modal/_open/modal_open.css"); /* иначе не работает */
 @import url("../blocks/modal/_close/modal_close.css");
 @import url("../blocks/cards/__like/_active/cards__like_button_active.css");
+@import url("../blocks/cards/__title/_text/cards__title_text_ellipsis.css");
+@import url("../blocks/profile-info/__title/_text/profile-info__title_text_ellipsis.css");

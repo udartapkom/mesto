@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="pages/style.css">
-  <meta name="description" content="Четвертый самостоятельный проект на Яндекс практикуме">
+  <meta name="description" content="Пятый самостоятельный проект на Яндекс практикуме">
   <meta name="author" content="Попов Роман">
   <title>Проект Место</title>
   </head>
@@ -31,30 +31,38 @@
     <footer class="footer">
         <h2 class="footer__copyright">&copy; 2020 Mesto Russia</h2>
     </footer>
-<div class="modal modal_profile">
+<div class="modal modal_profile modal_close">
     <div class="modal__content">
         <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
         <h2 class="modal__header">Редактировать профиль</h2>
         <form name="profile-edit" action="#" class="modal__form">
-            <input name="input-name" type="text" value="" required placeholder="Введите имя"
+            <input name="input-name" type="text" required value="" placeholder="Введите имя"
                 class="modal__input modal__input_name">
-            <input name="input-profession" type="text" value="" required placeholder="Введите профессию"
+            <input name="input-profession" type="text" required value="" placeholder="Введите профессию"
                 class="modal__input modal__input_profession">
             <button type="submit" class="modal__save">Сохранить</button>
         </form>
     </div>
 </div>
-<div class="modal modal_add-card">
+<div class="modal modal_add-card modal_close">
     <div class="modal__content">
         <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
         <h2 class="modal__header">Новое место</h2>
         <form name="profile-edit" action="#" class="modal__form">
-            <input name="input-name" type="text" value="" required placeholder="Название"
+            <input name="input-name" type="text" required value="" placeholder="Название"
                 class="modal__input modal__input_name">
-            <input name="input-profession" type="text" value="" required placeholder="Ссылка на картинку"
+            <input name="input-profession" type="text" required value="" placeholder="Ссылка на картинку"
                 class="modal__input modal__input_profession">
             <button type="submit" class="modal__save">Сохранить</button>
         </form>
+    </div>
+</div>
+
+<div class="modal modal_look-photo modal_close">
+    <div class="modal__content-zoom">
+        <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
+        <img class="modal__photo-zoom">
+        <p class="modal__photo-signature"></p>
     </div>
 </div>
 
