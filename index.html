@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/style.css">
-    <meta name="description" content="Четвертый самостоятельный проект на Яндекс практикуме">
-    <meta name="author" content="Попов Роман">
-    <title>Проект Место</title>
-</head>
-
-<body class="body">
-    <header class="header">
-        <div class="header__logo"></div>
-    </header>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/style.css">
+  <meta name="description" content="Четвертый самостоятельный проект на Яндекс практикуме">
+  <meta name="author" content="Попов Роман">
+  <title>Проект Место</title>
+  </head>
+  <body class="body">
+        <header class="header">
+          <div class="header__logo"></div>
+        </header>
     <main class="content">
         <section class="profile">
             <img class="profile__avatar" src="images/kusto.jpg" alt="Аватар пользователя">
@@ -27,51 +25,51 @@
             <button type="button" class="profile__add-button" aria-label="Добавить профиль"></button>
         </section>
         <section class="elements">
-
-        </section>
+            
+       </section>
     </main>
     <footer class="footer">
         <h2 class="footer__copyright">&copy; 2020 Mesto Russia</h2>
     </footer>
+<div class="modal modal_profile">
+    <div class="modal__content">
+        <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
+        <h2 class="modal__header">Редактировать профиль</h2>
+        <form name="profile-edit" action="#" class="modal__form">
+            <input name="input-name" type="text" value="" required placeholder="Введите имя"
+                class="modal__input modal__input_name">
+            <input name="input-profession" type="text" value="" required placeholder="Введите профессию"
+                class="modal__input modal__input_profession">
+            <button type="submit" class="modal__save">Сохранить</button>
+        </form>
+    </div>
+</div>
+<div class="modal modal_add-card">
+    <div class="modal__content">
+        <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
+        <h2 class="modal__header">Новое место</h2>
+        <form name="profile-edit" action="#" class="modal__form">
+            <input name="input-name" type="text" value="" required placeholder="Название"
+                class="modal__input modal__input_name">
+            <input name="input-profession" type="text" value="" required placeholder="Ссылка на картинку"
+                class="modal__input modal__input_profession">
+            <button type="submit" class="modal__save">Сохранить</button>
+        </form>
+    </div>
+</div>
 
-    <div class="modal modal_edit_profile">
-        <div class="modal__content">
-            <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
-            <h2 class="modal__header"></h2>
-            <form name="add-card" action="#" class="modal__form">
-                <input name="input-name" type="text" value="" required placeholder="" class="modal__input modal__input_name">
-                <input name="input-profession" type="text" value="" required placeholder=""
-                    class="modal__input modal__input_profession">
-                <button type="submit" class="modal__save">Сохранить</button>
-            </form>
+<template class="template-card">
+    <div class="cards">
+        <button type="button" class="cards__trash" aria-label="Удалить"></button>
+        <img class="cards__photo">
+        <div class="cards__title">
+            <h2 class="cards__title-style cards__title_text_ellipsis"></h2>
+            <button type="button" class="cards__like" aria-label="Лайкнуть"></button>
         </div>
     </div>
-    <div class="modal modal_add_card">
-        <div class="modal__content">
-            <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
-            <h2 class="modal__header"></h2>
-            <form name="add-card" action="#" class="modal__form">
-                <input name="input-name" type="text" value="" required placeholder="" class="modal__input modal__input_name">
-                <input name="input-profession" type="text" value="" required placeholder=""
-                    class="modal__input modal__input_profession">
-                <button type="submit" class="modal__save">Сохранить</button>
-            </form>
-        </div>
-    </div>
+</template>
 
 
-    <template class="template-card">
-        <div class="cards">
-            <button type="button" class="cards__trash" aria-label="Удалить"></button>
-            <img class="cards__photo">
-            <div class="cards__title">
-                <h2 class="cards__title-style cards__title_text_ellipsis"></h2>
-                <button type="button" class="cards__like" aria-label="Лайкнуть"></button>
-            </div>
-        </div>
-    </template>
-
-    <script src="script/idex.js"></script>
-</body>
-
+<script src="script/idex.js"></script>
+  </body>
 </html>

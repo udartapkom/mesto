@@ -1,18 +1,30 @@
-let editButton = document.querySelector(".profile-info__edit-button");
-let modal = document.querySelector(".modal");
-let profileName = document.querySelector(".profile-info__title");
-let profileProfession = document.querySelector(".profile-info__subtitle");
-let closeModal = document.querySelector(".modal__close-button");
-   let modalProfession = document.querySelector(".modal__input_profession");
-   let modalName = document.querySelector(".modal__input_name");
-   let submitButton = document.querySelector(".modal__save");
-let cards = document.querySelector(".elements");
-const profileForm = document.querySelector(".profile-form");
-const newCard = document.querySelector(".new-card");
-const cardTemplate = document.querySelector(".template-card");
-const addButton = document.querySelector(".profile__add-button");
-   const mOpen = document.querySelector(".modal__header")
+const profileName = document.querySelector(".profile-info__title");
+const profileProfession = document.querySelector(".profile-info__subtitle");
 
+const modalProfession = document.querySelector(".modal__input_profession");
+const modalName = document.querySelector(".modal__input_name");
+
+//окна
+const modalProfile = document.querySelector(".modal_profile");
+const modalAddCard = document.querySelector(".modal_add-card");
+
+//кнопки 
+const closeModalProfile = modalProfile.querySelector(".modal__close-button");
+const closeModalAddCard = modalAddCard.querySelector(".modal__close-button");
+
+const newCardButton = document.querySelector(".profile__add-button");
+const editProfileButton = document.querySelector(".profile-info__edit-button");
+
+const saveProfile = modalProfile.querySelector(".modal__save");
+const saveCard = modalAddCard.querySelector(".modal__save");
+
+//Поля ввода
+const modalPlace = modalAddCard.querySelector(".modal__input_profession");
+const modalTitle= modalAddCard.querySelector(".modal__input_name");
+
+//Карточки
+const cards = document.querySelector(".elements");
+const cardTemplate = document.querySelector(".template-card");
 
 const initialCards = [
     {
@@ -41,21 +53,20 @@ const initialCards = [
     }
 ];
 
-/* Перебираем элементы массива */
+// Перебираем элементы массива 
 const cardsList = () => {
-    const items = initialCards.map(element =>  cardsGenerate(element)); /* Передаем в функцию cardsGenerate элементы массива */
-        cards.append(... items); /* Все что вернула функция, собираем в кучку и добавляем в DOM */
+    const items = initialCards.map(element =>  cardsGenerate(element)); // Передаем в функцию cardsGenerate элементы массива 
+        cards.append(... items); // Все что вернула функция, собираем в кучку и добавляем в DOM 
 };
 
-/*Функция генерирует готовую карточку в зависимости от переданных ей данных и вешает слушателей на кнопки*/
+// Функция генерирует готовую карточку в зависимости от переданных ей данных и вешает слушателей на кнопки
 const cardsGenerate = data => {
-    const elCard = cardTemplate.content.cloneNode(true); /*  Клонируем карточку*/
-    elCard.querySelector(".cards__title-style").innerText = data.name; /* ищем нужный элемент и пишем в него соответствующие данные*/ 
+    const elCard = cardTemplate.content.cloneNode(true); // Клонируем карточку 
+    elCard.querySelector(".cards__title-style").innerText = data.name; // ищем нужный элемент и пишем в него соответствующие данные
     elCard.querySelector(".cards__photo").src = data.link;
-    const like = elCard.querySelector(".cards__like"); /* ищем кнопку лайк и корзина  */
+    const like = elCard.querySelector(".cards__like"); // ищем кнопку лайк и корзина
     const trashButton = elCard.querySelector(".cards__trash"); 
-    trashButton.addEventListener("click", cardTrash); /* Вешаем на "корзину", "добавить", "лайк" слушателя и вызываем соответствующую функцию */
-    //addButton.addEventListener("click", modalOpen); 
+    trashButton.addEventListener("click", cardTrash); // Вешаем на "корзину" и "лайк" слушателя и вызываем соответствующую функцию 
     like.addEventListener("click", likeActive);
     return elCard;
 }
@@ -67,92 +78,62 @@ const likeActive = event =>{
     event.target.classList.toggle("cards__like_button_active"); // лайк - дизлайк
 }
 
-const modalOpen = (swichModal) => {
-
-   switch (swichModal.toElement.classList.value){ //Получаем класс нажатой кнопки и в зависимости от класса заполняем окно 
-    case "profile__add-button":
-        modalName.value = '';
-        mOpen.innerText = "Новое место";
-        modalName.placeholder = "Название";
-        modalProfession.value = '';
-        modalProfession.placeholder = "Ссылка на картинку";
-        
-        submitButton.addEventListener("click", modalMestoSave = event =>{
-            event.preventDefault(); 
-           // submitButton.addEventListener("submit");
-            const item = cardsGenerate({
-                      name: modalName.value,
-                      link: modalProfession.value 
-                 });
-              cards.prepend(item);
-        });  
-        break;
-    
-        case "profile-info__edit-button":
-        mOpen.innerText = "Редактировать профиль";
-        modalName.value = profileName.textContent;
-        modalName.placeholder = "Введите имя";
-        modalProfession.value = profileProfession.textContent;
-        modalProfession.placeholder = "Введите профессию";
-
-       // submitButton.addEventListener("submit", modalProfileSave);
-      
-        break;
-}
-    // console.log(swichModal.toElement.classList.value);
-        //modal.classList.add("modal_open");
-        modalToggle();
-    }
 cardsList(); // запускаем всё это безобразие написанное выше
 
-/* функция открытия закрытия модалки */
-function modalToggle(){  
- // если у modal есть модификатор modal_open, убираем его     
-    if (modal.classList.contains("modal_open")) {
-        modal.classList.toggle("modal_open");
+// функция открытия закрытия модалки 
+function modalToggle(modalWindow) {
+    // если у модалки есть модификатор modal_open, убираем его     
+    if (modalWindow.classList.contains("modal_open")) {
+        modalWindow.classList.toggle("modal_open");
     }
- // иначе, добавляем его 
-       else{
-        modal.classList.toggle("modal_open"); 
+    // иначе, добавляем
+    else {
+        modalWindow.classList.toggle("modal_open");
+    }
+} 
 
-        }
-    } 
-
- /* function modalProfileSave(event){
-    event.preventDefault(); 
+/* записываем данные из формы в профиль */
+function modalSave(element) {
     profileName.textContent = modalName.value;
     profileProfession.textContent = modalProfession.value;
-    modalToggle(); 
-}   */
+    modalToggle(element); /* записали, а теперь закрыть окно */
+}
+function prevent(event) { //функция антиперезагрузка страницы
+    event.preventDefault();
+}
 
-/* function modalMestoSave(event){
-    event.preventDefault(); 
-    submitButton.addEventListener("submit");
+//блок редактирования профиля
+editProfileButton.addEventListener("click", function () {
+    modalName.value = profileName.textContent;
+    modalProfession.value = profileProfession.textContent;
+    modalToggle(modalProfile);
+});
+
+saveProfile.addEventListener("click", function () {
+    modalSave(modalProfile);
+    prevent(event);
+});
+
+closeModalProfile.addEventListener("click", function () {
+    modalToggle(modalProfile);
+});
+
+//блок добавления карточек
+newCardButton.addEventListener("click", function () {
+    modalToggle(modalAddCard);
+});
+saveCard.addEventListener("click", function () {
     const item = cardsGenerate({
-              name: modalName.value,
-              link: modalProfession.value 
-         });
-      cards.prepend(item);
-      modalToggle(); 
+        name: modalTitle.value,
+        link: modalPlace.value
+    });
+    cards.prepend(item);
+    modalTitle.value = ""; //после добавления карточки, очищаем поля ввода, чтобы при следующем открытии поля были пустыми
+    modalPlace.value = "";
+    modalToggle(modalAddCard);
+    prevent(event);
 
-} */
-
-editButton.addEventListener("click", modalOpen);
-closeModal.addEventListener("click", modalToggle);
-addButton.addEventListener("click", modalOpen);
-//submitButton.addEventListener("submit", modalSave()
-    //event.preventDefault(); 
-   // const item = cardsGenerate({
-     //   name: modalName.value,
-       // link: modalProfession.value 
-  //  });
-  //  cards.prepend(item);
-  //  modalToggle(); 
-// });
-// submitButtonProfile.addEventListener("submit", modalSave = event => {
-   // event.preventDefault();
-   // profileName.textContent = modalName.value;
-   // profileProfession.textContent = modalProfession.value;
-    // modalToggle();    
-// });
-  
+});
+closeModalAddCard.addEventListener("click", function () {
+    modalToggle(modalAddCard);
+});
