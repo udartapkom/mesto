@@ -15,7 +15,6 @@ const modalLookPhoto = document.querySelector(".modal_look-photo");
 
 const modalPhoto = modalLookPhoto.querySelector(".modal__photo-zoom"); 
 const modalSignature = modalLookPhoto.querySelector(".modal__photo-signature");
-const modalContent = modalLookPhoto.querySelector(".modal__content");
 
 //кнопки 
 const closeModalProfile = modalProfile.querySelector(".modal__close-button");
@@ -61,23 +60,23 @@ const initialCards = [
 
 // Перебираем элементы массива 
 const cardsList = () => {
-    const items = initialCards.map(element =>  cardsGenerate(element)); // Передаем в функцию cardsGenerate элементы массива 
+    const items = initialCards.map(element =>  cardGenerate(element)); // Передаем в функцию cardGenerate элементы массива 
         cards.append(... items); // Все что вернула функция, собираем в кучку и добавляем в DOM 
 };
 
 // Функция генерирует готовую карточку в зависимости от переданных ей данных и вешает слушателей на кнопки
-const cardsGenerate = data => {
+const cardGenerate = data => {
     const elCard = cardTemplate.content.cloneNode(true); // Клонируем карточку 
     nameText = elCard.querySelector(".cards__title-style") // ищем нужные элементы
     photoCard = elCard.querySelector(".cards__photo");
     nameText.innerText = data.name;  //и пишем в них соответствующие данные
     photoCard.src = data.link; 
     photoCard.alt = data.name;
-    findFunction(elCard, nameText, photoCard); //передаем параметры для слушателей и модалки
+    findAndListeners(elCard, nameText, photoCard); //передаем параметры для слушателей и модалки
     return elCard;
 }
 // Поиск и навешивание слушателей
-function findFunction(elCard, nameText, photoCard ){
+function findAndListeners(elCard, nameText, photoCard ){
     const like = elCard.querySelector(".cards__like"); // ищем кнопку лайк и корзина
     const trashButton = elCard.querySelector(".cards__trash"); 
     trashButton.addEventListener("click", cardTrash); // Вешаем на "корзину" и "лайк" слушателя и вызываем соответствующую функцию 
@@ -87,7 +86,6 @@ function findFunction(elCard, nameText, photoCard ){
     modalSignature.textContent = nameText.textContent;
     
     modalToggle(modalLookPhoto); //открываем - закрываем модалку
-  
 });
  
 }
@@ -115,9 +113,8 @@ function modalToggle(modalWindow) {
     }
 } 
 
-/* записываем данные из формы в профиль */
+/* записываем данные из формы в профиль, event.preventDefault(); здесь быть не должно*/
 function modalSave(element) {
-    event.preventDefault();
     profileName.textContent = modalName.value;
     profileProfession.textContent = modalProfession.value;
     modalToggle(element); /* записали, а теперь закрыть окно */
@@ -145,7 +142,7 @@ newCardButton.addEventListener("click", function () {
 });
 saveCard.addEventListener("submit", function (event) {
     event.preventDefault();
-    const item = cardsGenerate({
+    const item = cardGenerate({
         name: modalTitle.value,
         link: modalPlace.value
     });
