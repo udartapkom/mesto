@@ -35,11 +35,17 @@
     <div class="modal__content">
         <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
         <h2 class="modal__header">Редактировать профиль</h2>
-        <form name="profile-edit" action="#" class="modal__form">
-            <input name="input-name" type="text" required value="" placeholder="Введите имя"
-                class="modal__input modal__input_name">
-            <input name="input-profession" type="text" required value="" placeholder="Введите профессию"
-                class="modal__input modal__input_profession">
+        <form name="profile-edit" action="#" class="modal__form" novalidate>
+            <label class="modal__label">
+                <input name="input-name" type="text" required value="" placeholder="Введите имя"
+                    class="modal__input modal__input_name" minlength="2" maxlength="40" autocomplete="off">
+                <span class="modal__error_visible" id="input-name-error"></span>
+            </label>
+            <label class="modal__label">
+                <input name="input-profession" type="text" required value="" placeholder="Введите профессию"
+                    class="modal__input modal__input_profession" minlength="2" maxlength="200" autocomplete="off">
+                <span class="modal__error_visible" id="input-profession-error"></span>
+            </label>
             <button type="submit" class="modal__save">Сохранить</button>
         </form>
     </div>
@@ -48,12 +54,18 @@
     <div class="modal__content">
         <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
         <h2 class="modal__header">Новое место</h2>
-        <form name="profile-edit" action="#" class="modal__form">
-            <input name="input-name" type="text" required value="" placeholder="Название"
-                class="modal__input modal__input_name">
-            <input name="input-profession" type="text" required value="" placeholder="Ссылка на картинку"
-                class="modal__input modal__input_profession">
-            <button type="submit" class="modal__save">Сохранить</button>
+        <form name="profile-edit" action="#" class="modal__form" novalidate>
+            <label class="modal__label">
+                <input name="input-name" type="text" required value="" placeholder="Название"
+                    class="modal__input modal__input_name" minlength="1" maxlength="30" autocomplete="off">
+                <span class="modal__error_visible" id="input-name-error"></span>
+            </label>
+            <label class="modal__label">
+                <input name="input-profession" type="url" required value="" placeholder="Ссылка на картинку"
+                    class="modal__input modal__input_profession" autocomplete="off">
+                <span class="modal__error_visible" id="input-profession-error"></span>
+            </label>
+            <button type="submit" class="modal__save modal__save_state_invalid">Сохранить</button>
         </form>
     </div>
 </div>
@@ -77,6 +89,9 @@
     </div>
 </template>
 
+<script src="script/validate.js"></script>
 <script src="script/idex.js"></script>
+
+
   </body>
 </html>

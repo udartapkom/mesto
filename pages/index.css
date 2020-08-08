@@ -14,3 +14,6 @@
 @import url("../blocks/cards/__like/_active/cards__like_button_active.css");
 @import url("../blocks/cards/__title/_text/cards__title_text_ellipsis.css");
 @import url("../blocks/profile-info/__title/_text/profile-info__title_text_ellipsis.css");
+@import url("../blocks/modal/__input/_type_error/modal__input_type_error.css");
+@import url("../blocks/modal/__save/_state_invalid/modal__save_state_invalid.css");
+@import url("../blocks/modal/_error_visible/modal__error_visible.css");

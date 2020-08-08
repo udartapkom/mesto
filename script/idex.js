@@ -84,8 +84,9 @@ function findAndListeners(elCard, nameText, photoCard ){
     photoCard.addEventListener("click", function(){ //вешаем слушателя на фото, получем параметры и сразу пишем в модалку
     modalPhoto.src = photoCard.src;
     modalSignature.textContent = nameText.textContent;
-    
+
     modalToggle(modalLookPhoto); //открываем - закрываем модалку
+  
 });
  
 }
@@ -100,6 +101,14 @@ const likeActive = event =>{
 
 cardsList(); // запускаем всё это безобразие написанное выше
 
+closeModalClick(modalLookPhoto);
+closeModalClick(modalProfile);
+closeModalClick(modalAddCard);
+
+closeModalEsc(modalProfile);
+closeModalEsc(modalAddCard);
+closeModalEsc(modalLookPhoto);
+
 // функция открытия закрытия модалки 
 function modalToggle(modalWindow) {
     if (modalWindow.classList.contains("modal_open")) { // если у модалки есть модификатор modal_open,      
@@ -109,7 +118,6 @@ function modalToggle(modalWindow) {
     else {                                               
         modalWindow.classList.toggle("modal_close"); // иначе убираем close
         modalWindow.classList.toggle("modal_open");  // и добавляем open
-         
     }
 } 
 
@@ -121,10 +129,11 @@ function modalSave(element) {
 }
 
 //блок редактирования профиля
-editProfileButton.addEventListener("click", function () {
+editProfileButton.addEventListener("click", function (event) {
     modalName.value = profileName.textContent;
     modalProfession.value = profileProfession.textContent;
     modalToggle(modalProfile);
+    
 });
 
 saveProfile.addEventListener("submit", function (event) {
@@ -134,11 +143,14 @@ saveProfile.addEventListener("submit", function (event) {
 
 closeModalProfile.addEventListener("click", function () {
     modalToggle(modalProfile);
+
 });
 
 //блок добавления карточек
 newCardButton.addEventListener("click", function () {
     modalToggle(modalAddCard);
+    
+    
 });
 saveCard.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -159,4 +171,25 @@ closeModalAddCard.addEventListener("click", function () {
 //блок просмотра фото
 closeModalLook.addEventListener("click", function () {
     modalToggle(modalLookPhoto);
+    closeModalLook.focus();
 });
+
+//закрываем модалку по Esc
+function closeModalEsc(modalType) {
+    modalType.addEventListener('keydown', function (event) {
+        if (event.key === "Escape" && modalType.classList.contains("modal_open")) {
+            modalToggle(modalType);
+        }
+        modalType.removeEventListener('keydown', (event));
+
+    });
+}
+//закрываем модалку по Click
+function closeModalClick(modalType) {
+    modalType.addEventListener('click', (event) => {
+        if (event.target.classList.contains('modal') || event.target.classList.contains('modal__close-button') && modalType.classList.contains("modal_open")) {
+            modalToggle(modalType);
+        }
+        modalType.removeEventListener('click', (event));
+    });
+} 
