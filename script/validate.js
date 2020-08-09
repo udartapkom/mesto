@@ -14,7 +14,7 @@ const enableValidation = (formsObj) => {
     formElement.addEventListener("submit", (event) => {
       event.preventDefault();
     });
-   
+
     findInputs(formElement, formsObj);
   });
 };
@@ -36,10 +36,10 @@ const findInputs = (formElement, formsObj) => {
 const buttonValidate = (formElement, formsObj, isFormValid) => {
   const buttons = Array.from(formElement.querySelectorAll(formsObj.submitButtonSelector));
   buttons.forEach((buttonElement) => {
-    if (!isFormValid ) {
+    if (!isFormValid) {
       buttonElement.classList.remove(formsObj.inactiveButtonClass);
       formElement.removeEventListener("keydown", enterDisable); //включаем ентер
-      }
+    }
     else {
       buttonElement.classList.add(formsObj.inactiveButtonClass);// отключаем ентер
       formElement.addEventListener("keydown", enterDisable);
@@ -72,9 +72,7 @@ const showError = (formElement, inputElement, errorMessage) => {
 const hideError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   errorElement.textContent = '';
- }
-
- 
+}
 
 //запустить скрипт
 enableValidation(formsObj);

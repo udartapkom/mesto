@@ -36,8 +36,8 @@ const modalTitle= modalAddCard.querySelector(".modal__input_name");
 
 // Перебираем элементы массива 
 const cardsList = () => {
-    const items = initialCards.map(element =>  cardGenerate(element)); // Передаем в функцию cardGenerate элементы массива 
-        cards.append(... items); // Все что вернула функция, собираем в кучку и добавляем в DOM 
+    const items = initialCards.map(element => cardGenerate(element)); // Передаем в функцию cardGenerate элементы массива 
+    cards.append(...items); // Все что вернула функция, собираем в кучку и добавляем в DOM 
 };
 
 // Функция генерирует готовую карточку в зависимости от переданных ей данных и вешает слушателей на кнопки
@@ -46,31 +46,32 @@ const cardGenerate = data => {
     nameText = elCard.querySelector(".cards__title-style") // ищем нужные элементы
     photoCard = elCard.querySelector(".cards__photo");
     nameText.innerText = data.name;  //и пишем в них соответствующие данные
-    photoCard.src = data.link; 
+    photoCard.src = data.link;
     photoCard.alt = data.name;
     findAndListeners(elCard, nameText, photoCard); //передаем параметры для слушателей и модалки
     return elCard;
 }
 // Поиск и навешивание слушателей
-function findAndListeners(elCard, nameText, photoCard ){
+function findAndListeners(elCard, nameText, photoCard) {
     const like = elCard.querySelector(".cards__like"); // ищем кнопку лайк и корзина
-    const trashButton = elCard.querySelector(".cards__trash"); 
+    const trashButton = elCard.querySelector(".cards__trash");
     trashButton.addEventListener("click", cardTrash); // Вешаем на "корзину" и "лайк" слушателя и вызываем соответствующую функцию 
     like.addEventListener("click", likeActive);
-    photoCard.addEventListener("click", function(){ //вешаем слушателя на фото, получем параметры и сразу пишем в модалку
-    modalPhoto.src = photoCard.src;
-    modalSignature.textContent = nameText.textContent;
+    photoCard.addEventListener("click", function () { //вешаем слушателя на фото, получем параметры и сразу пишем в модалку
+        modalPhoto.src = photoCard.src;
+        modalSignature.textContent = nameText.textContent;
 
-    modalToggle(modalLookPhoto); //открываем - закрываем модалку
-  
-});
- 
+        modalToggle(modalLookPhoto); //открываем - закрываем модалку
+        enableListenerEsc();
+
+    });
+
 }
-const cardTrash = event =>{
+const cardTrash = event => {
     event.target.closest(".cards").remove(); // ищем ближайшую карточку и убиваем её 
 }
 
-const likeActive = event =>{
+const likeActive = event => {
     event.target.classList.toggle("cards__like_button_active"); // лайк - дизлайк
 }
 
@@ -80,21 +81,19 @@ closeModalClick(modalLookPhoto);
 closeModalClick(modalProfile);
 closeModalClick(modalAddCard);
 
-closeModalEsc(modalProfile);
-closeModalEsc(modalAddCard);
-closeModalEsc(modalLookPhoto);
-
 // функция открытия закрытия модалки 
 function modalToggle(modalWindow) {
     if (modalWindow.classList.contains("modal_open")) { // если у модалки есть модификатор modal_open,      
         modalWindow.classList.toggle("modal_open"); //убираем его
         modalWindow.classList.toggle("modal_close"); //и ставим modal_close
+        disableListenerEsc();
     }
-    else {                                               
+    else {
         modalWindow.classList.toggle("modal_close"); // иначе убираем close
         modalWindow.classList.toggle("modal_open");  // и добавляем open
+        enableListenerEsc();
     }
-} 
+}
 
 /* записываем данные из формы в профиль, event.preventDefault(); здесь быть не должно*/
 function modalSave(element) {
@@ -108,6 +107,7 @@ editProfileButton.addEventListener("click", function (event) {
     modalName.value = profileName.textContent;
     modalProfession.value = profileProfession.textContent;
     modalToggle(modalProfile);
+
 });
 
 saveProfile.addEventListener("submit", function (event) {
@@ -117,15 +117,13 @@ saveProfile.addEventListener("submit", function (event) {
 
 closeModalProfile.addEventListener("click", function () {
     modalToggle(modalProfile);
-
 });
 
 //блок добавления карточек
 newCardButton.addEventListener("click", function () {
     modalToggle(modalAddCard);
     saveCard.reset();
-    
-    
+    enableListenerEsc();
 });
 saveCard.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -139,7 +137,7 @@ saveCard.addEventListener("submit", function (event) {
     submitButton.classList.add("modal__save_state_invalid"); //при следующем открытии окна кнопка заблочена
     enterDisable(event); // enter тоже заблочен 
     modalToggle(modalAddCard);
- 
+
 });
 closeModalAddCard.addEventListener("click", function () {
     modalToggle(modalAddCard);
@@ -150,23 +148,36 @@ closeModalLook.addEventListener("click", function () {
     modalToggle(modalLookPhoto);
 });
 
-//закрываем модалку по Esc
- function closeModalEsc(modalType) {
-    document.addEventListener('keydown', function (event) {
-        if (event.key === "Escape" && modalType.classList.contains("modal_open")) {
-            modalToggle(modalType);
-         }
-        modalType.removeEventListener('keydown', (event));
-
+const isModalOpened = (modal) => {
+    return modal.classList.contains('modal_open');
+}
+const thisModalIsOpen = () => {
+    const modals = Array.from(document.querySelectorAll('.modal'));
+    const modalElement = modals.find(function (modal) {
+        return isModalOpened(modal);
     });
-} 
+    return modalElement;
+}
 
+function enableListenerEsc() {
+    document.addEventListener('keydown', closeModalEsc);
+}
+function disableListenerEsc() {
+    document.removeEventListener('keydown', closeModalEsc);
+}
+//закрываем модалку по Esc
+function closeModalEsc(event) {
+    // console.log(event.key); 
+    const modalElement = thisModalIsOpen();
+    if (event.key === "Escape") {
+        modalToggle(modalElement);
+    }
+}
 //закрываем модалку по Click
 function closeModalClick(modalType) {
     modalType.addEventListener('click', (event) => {
         if (event.target.classList.contains('modal') || event.target.classList.contains('modal__close-button') && modalType.classList.contains("modal_open")) {
             modalToggle(modalType);
         }
-        modalType.removeEventListener('click', (event));
     });
 } 
