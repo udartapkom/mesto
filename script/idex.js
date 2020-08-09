@@ -16,6 +16,7 @@ const modalLookPhoto = document.querySelector(".modal_look-photo");
 const modalPhoto = modalLookPhoto.querySelector(".modal__photo-zoom"); 
 const modalSignature = modalLookPhoto.querySelector(".modal__photo-signature");
 
+
 //кнопки 
 const closeModalProfile = modalProfile.querySelector(".modal__close-button");
 const closeModalAddCard = modalAddCard.querySelector(".modal__close-button");
@@ -26,37 +27,12 @@ const editProfileButton = document.querySelector(".profile-info__edit-button");
 
 const saveProfile = modalProfile.querySelector(".modal__form");
 const saveCard = modalAddCard.querySelector(".modal__form");
+const submitButton = modalAddCard.querySelector(".modal__save");
 
 //Поля ввода
 const modalPlace = modalAddCard.querySelector(".modal__input_profession");
 const modalTitle= modalAddCard.querySelector(".modal__input_name");
 
-const initialCards = [
-    {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-    },
-    {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-    },
-    {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-    },
-    {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-    },
-    {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-    },
-    {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-    }
-];
 
 // Перебираем элементы массива 
 const cardsList = () => {
@@ -90,7 +66,6 @@ function findAndListeners(elCard, nameText, photoCard ){
 });
  
 }
-
 const cardTrash = event =>{
     event.target.closest(".cards").remove(); // ищем ближайшую карточку и убиваем её 
 }
@@ -133,7 +108,6 @@ editProfileButton.addEventListener("click", function (event) {
     modalName.value = profileName.textContent;
     modalProfession.value = profileProfession.textContent;
     modalToggle(modalProfile);
-    
 });
 
 saveProfile.addEventListener("submit", function (event) {
@@ -149,6 +123,7 @@ closeModalProfile.addEventListener("click", function () {
 //блок добавления карточек
 newCardButton.addEventListener("click", function () {
     modalToggle(modalAddCard);
+    saveCard.reset();
     
     
 });
@@ -161,6 +136,8 @@ saveCard.addEventListener("submit", function (event) {
     cards.prepend(item);
     modalTitle.value = ""; //после добавления карточки, очищаем поля ввода, чтобы при следующем открытии поля были пустыми
     modalPlace.value = "";
+    submitButton.classList.add("modal__save_state_invalid"); //при следующем открытии окна кнопка заблочена
+    enterDisable(event); // enter тоже заблочен 
     modalToggle(modalAddCard);
  
 });
@@ -171,19 +148,19 @@ closeModalAddCard.addEventListener("click", function () {
 //блок просмотра фото
 closeModalLook.addEventListener("click", function () {
     modalToggle(modalLookPhoto);
-    closeModalLook.focus();
 });
 
 //закрываем модалку по Esc
-function closeModalEsc(modalType) {
-    modalType.addEventListener('keydown', function (event) {
+ function closeModalEsc(modalType) {
+    document.addEventListener('keydown', function (event) {
         if (event.key === "Escape" && modalType.classList.contains("modal_open")) {
             modalToggle(modalType);
-        }
+         }
         modalType.removeEventListener('keydown', (event));
 
     });
-}
+} 
+
 //закрываем модалку по Click
 function closeModalClick(modalType) {
     modalType.addEventListener('click', (event) => {

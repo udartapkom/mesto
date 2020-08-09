@@ -36,7 +36,7 @@ const findInputs = (formElement, formsObj) => {
 const buttonValidate = (formElement, formsObj, isFormValid) => {
   const buttons = Array.from(formElement.querySelectorAll(formsObj.submitButtonSelector));
   buttons.forEach((buttonElement) => {
-    if (!isFormValid) {
+    if (!isFormValid ) {
       buttonElement.classList.remove(formsObj.inactiveButtonClass);
       formElement.removeEventListener("keydown", enterDisable); //включаем ентер
       }
@@ -72,6 +72,9 @@ const showError = (formElement, inputElement, errorMessage) => {
 const hideError = (formElement, inputElement) => {
   const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
   errorElement.textContent = '';
-}
+ }
+
+ 
+
 //запустить скрипт
 enableValidation(formsObj);
