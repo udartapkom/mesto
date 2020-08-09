@@ -123,7 +123,6 @@ closeModalProfile.addEventListener("click", function () {
 newCardButton.addEventListener("click", function () {
     modalToggle(modalAddCard);
     saveCard.reset();
-    enableListenerEsc();
 });
 saveCard.addEventListener("submit", function (event) {
     event.preventDefault();
@@ -167,7 +166,6 @@ function disableListenerEsc() {
 }
 //закрываем модалку по Esc
 function closeModalEsc(event) {
-    // console.log(event.key); 
     const modalElement = thisModalIsOpen();
     if (event.key === "Escape") {
         modalToggle(modalElement);
