@@ -6,7 +6,7 @@ export const modalName = document.querySelector(".modal__input_name");
 
 //Карточки
 export const cards = document.querySelector(".elements");
-export const cardTemplate = document.querySelector(".template-card");
+export const cardTemplate = ".template-card";
 
 //окна
 export const modalProfile = document.querySelector(".modal_profile");
@@ -16,7 +16,9 @@ export const modalLookPhoto = document.querySelector(".modal_look-photo");
 export const modalPhoto = modalLookPhoto.querySelector(".modal__photo-zoom");
 export const modalSignature = modalLookPhoto.querySelector(".modal__photo-signature");
 
-//кнопки 
+export const modals = document.querySelectorAll(".modal");
+
+//кнопки
 export const closeModalProfile = modalProfile.querySelector(".modal__close-button");
 export const closeModalAddCard = modalAddCard.querySelector(".modal__close-button");
 export const closeModalLook = modalLookPhoto.querySelector(".modal__close-button");
@@ -33,10 +35,10 @@ export const modalPlace = modalAddCard.querySelector(".modal__input_profession")
 export const modalTitle = modalAddCard.querySelector(".modal__input_name");
 
 export const formsObj = {
-    formSelector: '.modal__form',
-    inputSelector: '.modal__input',
-    submitButtonSelector: '.modal__save',
-    inactiveButtonClass: 'modal__save_state_invalid',
-    inputErrorClass: 'modal__input_type_error',
-    errorClass: 'modal__error_visible'
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save",
+  inactiveButtonClass: "modal__save_state_invalid",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
 };
