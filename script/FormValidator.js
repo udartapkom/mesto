@@ -29,11 +29,11 @@ export class FormValidator {
     buttons.forEach((buttonElement) => {
       if (!isFormValid) {
         buttonElement.classList.remove(this._formsObj.inactiveButtonClass);
-        formElement.removeEventListener("keydown", this.enterDisable(event, buttonElement)); //включаем ентер
+        formElement.removeEventListener("keydown", this._enterDisable(event, buttonElement)); //включаем ентер
         buttonElement.removeAttribute("disabled", "disabled");
       } else {
         buttonElement.classList.add(this._formsObj.inactiveButtonClass); // отключаем ентер
-        formElement.addEventListener("keydown", this.enterDisable(event, buttonElement));
+        formElement.addEventListener("keydown", this._enterDisable(event, buttonElement));
         buttonElement.setAttribute("disabled", "disabled");
       }
     });

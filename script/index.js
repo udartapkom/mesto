@@ -87,10 +87,10 @@ closeModalProfile.addEventListener("click", function () {
 });
 
 //блок добавления карточек
-newCardButton.addEventListener("click", function () {
+newCardButton.addEventListener("mouseup", function () { // mouseup чтобы перекинуть фокус с кнопки на модалку
   modalToggle(modalAddCard);
   cardValidator.enableValidation();
-  // cardValidator.enterDisable(event);
+  modalTitle.focus();
   saveCard.reset();
 });
 saveCard.addEventListener("submit", function (event) {
