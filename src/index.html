@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="pages/index.css">
+    <!--<link rel="stylesheet" href="pages/index.css"> -->
     <meta name="description" content="Седьмой самостоятельный проект на Яндекс практикуме">
     <meta name="author" content="Попов Роман">
     <title>Проект Место</title>
@@ -35,18 +35,18 @@
     </footer>
     <div class="modal modal_profile modal_close">
         <div class="modal__content">
-            <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
+            <button type="button" class="modal__close-button modal__close-button_profile" aria-label="Закрыть окно"></button>
             <h2 class="modal__header">Редактировать профиль</h2>
             <form name="profile-edit" action="#" class="modal__form" novalidate>
                 <label class="modal__label">
-                    <input name="input-name" type="text" required value="" placeholder="Введите имя"
+                    <input name="name" type="text" required value="" placeholder="Введите имя"
                         class="modal__input modal__input_name" minlength="2" maxlength="40" autocomplete="off">
-                    <span class="modal__error_visible" id="input-name-error"></span>
+                    <span class="modal__error_visible" id="name-error"></span>
                 </label>
                 <label class="modal__label">
-                    <input name="input-profession" type="text" required value="" placeholder="Введите профессию"
+                    <input name="profession" type="text" required value="" placeholder="Введите профессию"
                         class="modal__input modal__input_profession" minlength="2" maxlength="200" autocomplete="off">
-                    <span class="modal__error_visible" id="input-profession-error"></span>
+                    <span class="modal__error_visible" id="profession-error"></span>
                 </label>
                 <button type="submit" class="modal__save">Сохранить</button>
             </form>
@@ -54,18 +54,18 @@
     </div>
     <div class="modal modal_add-card modal_close">
         <div class="modal__content">
-            <button type="button" class="modal__close-button" aria-label="Закрыть окно"></button>
+            <button type="button" class="modal__close-button modal__close-button_place" aria-label="Закрыть окно"></button>
             <h2 class="modal__header">Новое место</h2>
             <form name="profile-edit" action="#" class="modal__form" novalidate>
                 <label class="modal__label">
-                    <input name="input-name" type="text" required value="" placeholder="Название"
+                    <input name="placeName" type="text" required value="" placeholder="Название"
                         class="modal__input modal__input_name" minlength="1" maxlength="30" autocomplete="off">
-                    <span class="modal__error_visible" id="input-name-error"></span>
+                    <span class="modal__error_visible" id="placeName-error"></span>
                 </label>
                 <label class="modal__label">
-                    <input name="input-profession" type="url" required value="" placeholder="Ссылка на картинку"
+                    <input name="placeLink" type="url" required value="" placeholder="Ссылка на картинку"
                         class="modal__input modal__input_profession" autocomplete="off">
-                    <span class="modal__error_visible" id="input-profession-error"></span>
+                    <span class="modal__error_visible" id="placeLink-error"></span>
                 </label>
                 <button type="submit" class="modal__save" disabled>Сохранить</button>
             </form>
@@ -83,19 +83,14 @@
     <template class="template-card">
         <div class="cards">
             <button type="button" class="cards__trash" aria-label="Удалить"></button>
-            <img class="cards__photo" src="" alt="">
+            <img class="cards__photo" src="#" alt="">
             <div class="cards__title">
                 <h2 class="cards__title-style cards__title_text_ellipsis"></h2>
                 <button type="button" class="cards__like" aria-label="Лайкнуть"></button>
             </div>
         </div>
     </template>
-
-    <script src="script/initial-cards.js"></script>
-    <script type="module" src="script/data.js"></script>
-    <script type="module" src="script/index.js"></script>
-    <script type="module" src="script/FormValidator.js"></script>
-    <script type="module" src="script/Card.js"></script>
+    
 </body>
 
 </html>

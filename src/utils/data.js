@@ -19,8 +19,8 @@ export const modalSignature = modalLookPhoto.querySelector(".modal__photo-signat
 export const modals = document.querySelectorAll(".modal");
 
 //кнопки
-export const closeModalProfile = modalProfile.querySelector(".modal__close-button");
-export const closeModalAddCard = modalAddCard.querySelector(".modal__close-button");
+export const closeModalProfile = modalProfile.querySelector(".modal__close-button_profile");
+export const closeModalAddCard = modalAddCard.querySelector(".modal__close-button_place");
 export const closeModalLook = modalLookPhoto.querySelector(".modal__close-button");
 
 export const newCardButton = document.querySelector(".profile__add-button");

@@ -16,7 +16,7 @@ export class FormValidator {
   _findInputs = (formElement) => {
     const inputs = Array.from(formElement.querySelectorAll(this._formsObj.inputSelector));
     inputs.forEach((inputElement) => {
-      inputElement.addEventListener("input", () => {
+        inputElement.addEventListener("input", () => {
         this._inputValidate(formElement, inputElement); //функция валидации инпутов
         const isFormValid = inputs.some((inputElement) => !inputElement.validity.valid); // проверим валидность всех инпутов и отправим результат
         this._buttonValidate(formElement, isFormValid);
