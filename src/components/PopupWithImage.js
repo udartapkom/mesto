@@ -1,13 +1,15 @@
-import { modalPhoto, modalSignature } from "../utils/data.js";
 import { Popup } from "./Popup.js";
 
 export class PopupWithImage extends Popup {
-  constructor(modalWindow) {
-    super(modalWindow);
+  constructor(modalWindow, closeModalLook, modalPhoto, modalSignature) {
+    super(modalWindow, closeModalLook);
+    this._modalPhoto = modalPhoto;
+    this._modalSignature = modalSignature;
   }
   open(data) {
     super.open();
-    modalPhoto.src = data.src;
-    modalSignature.textContent = data.textContent;
+    this._modalPhoto.src = data.src;
+    this._modalPhoto.alt = data.textContent;
+    this._modalSignature.textContent = data.textContent;
   }
 }

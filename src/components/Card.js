@@ -1,14 +1,12 @@
-//import { addPhotoClick } from "./index.js";
-
 export class Card {
-  constructor( element, {handleCardClick}, cardTemplate) {
+  constructor(element, { handleCardClick }, cardTemplate) {
     this._element = element;
     this._handleCardClick = handleCardClick;
     this._cardTemplate = cardTemplate;
-    }
-  
+  }
+
   cardGenerate() {
-    const elCard = this._getTemplate().cloneNode(true); // Клонируем карточку
+    const elCard = this._getTemplate();
     const nameText = elCard.querySelector(".cards__title-style"); // ищем нужные элементы
     const photoCard = elCard.querySelector(".cards__photo");
     nameText.innerText = this._element.placeName; //и пишем в них соответствующие данные
@@ -20,7 +18,8 @@ export class Card {
 
   _getTemplate() {
     const template = document.querySelector(this._cardTemplate);
-    return template.content;
+    const clonedCard = template.content.cloneNode(true); // Клонируем карточку
+    return clonedCard;
   }
 
   _setEventListeners(elCard, nameText, photoCard) {
@@ -28,14 +27,13 @@ export class Card {
     const trashButton = elCard.querySelector(".cards__trash");
     trashButton.addEventListener("click", this._cardTrash); // Вешаем на "корзину" и "лайк" слушателя и вызываем соответствующую функцию
     like.addEventListener("click", this._likeActive);
-       
+
     photoCard.addEventListener("click", () => {
       const data = {};
       data.src = photoCard.src;
       data.textContent = nameText.textContent;
       this._handleCardClick(data);
     });
-  
   }
 
   _cardTrash = (event) => {

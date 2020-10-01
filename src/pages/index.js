@@ -1,7 +1,6 @@
 import "./index.css";
 import { Card } from "../components/Card.js";
 import { FormValidator } from "../components/FormValidator.js";
-import { Popup } from "../components/Popup.js";
 import { Section } from "../components/Section.js";
 import { PopupWithImage } from "../components/PopupWithImage.js";
 import { PopupWithForm } from "../components/PopupWithForm.js";
@@ -21,7 +20,11 @@ import {
   modalProfession,
   profileName,
   profileProfession,
-  modals,
+  closeModalLook,
+  submitButton,
+  modalPhoto, 
+  modalSignature,
+  cards
 } from "../utils/data.js";
 
 const addNewCard = (item) => {
@@ -38,9 +41,7 @@ const addNewCard = (item) => {
 // Создаем экземпяры классов
 const profileValidator = new FormValidator(formsObj, modalProfile); // Создаём экземпяры класса FormValidator для модалок
 const cardValidator = new FormValidator(formsObj, modalAddCard);
-const modalCard = new Popup(modalAddCard, modals);
-const modalEditProfile = new Popup(modalProfile, modals);
-const modalLook = new PopupWithImage(modalLookPhoto);
+const modalLook = new PopupWithImage(modalLookPhoto, closeModalLook, modalPhoto, modalSignature);
 const profileInfo = new UserInfo({
   professionElement: profileProfession,
   nameElement: profileName,
@@ -48,17 +49,17 @@ const profileInfo = new UserInfo({
 
 const section = new Section({
   // Создаём экземпяр класса Section и передаем в него массив и функцию renderer
-  items: initialCards,
+  items: initialCards.reverse(), //переворачиваем массив чтобы карточки отображались в нужном порядке
   renderer: (item) => {
     const card = addNewCard(item);
     const element = card.cardGenerate(); // вызываем метод cardGenerate()
     section.addItem(element); //передаем в метод класса Section готовую разметку
-  },
-});
+  }, 
+}, cards);
 
 section.renderItem(); // запускаем генерацию и добавление карточек
 
-const editPlaceForm = new PopupWithForm(modalAddCard, {
+const editPlaceForm = new PopupWithForm(modalAddCard, closeModalLook, formsObj, submitButton, {
   submitForm: (item) => {
     const card = addNewCard(item);
     const element = card.cardGenerate();
@@ -67,7 +68,7 @@ const editPlaceForm = new PopupWithForm(modalAddCard, {
   },
 });
 
-const editProfessionForm = new PopupWithForm(modalProfile, {
+const editProfessionForm = new PopupWithForm(modalProfile, closeModalLook, formsObj, submitButton,{
   submitForm: (item) => {
     profileInfo.setUserInfo(item.name, item.profession);
     editProfessionForm.close();
@@ -76,7 +77,6 @@ const editProfessionForm = new PopupWithForm(modalProfile, {
 
 editProfessionForm.setEventListeners();
 editPlaceForm.setEventListeners();
-modalCard.setEventListeners();
 modalLook.setEventListeners();
 
 //блок редактирования профиля
@@ -84,14 +84,14 @@ editProfileButton.addEventListener("click", function () {
   const profileInfoData = profileInfo.getUserInfo();
   modalName.value = profileInfoData.name;
   modalProfession.value = profileInfoData.profession;
-  modalEditProfile.open();
+  editProfessionForm.open();
   profileValidator.enableValidation();
 });
 
 //блок добавления карточек
 newCardButton.addEventListener("mouseup", function () {
   // mouseup чтобы перекинуть фокус с кнопки на модалку
-  modalCard.open();
+  editPlaceForm.open();
   cardValidator.enableValidation();
   modalTitle.focus();
   saveCard.reset();

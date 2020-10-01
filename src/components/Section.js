@@ -1,13 +1,11 @@
-import { cards } from "../utils/data.js";
 export class Section {
-  constructor({ items, renderer }) { //renderer - это функция
+  constructor({ items, renderer }, cards) { //renderer - это функция
     this._items = items;
     this._renderer = renderer;
     this._cards = cards;
-  
   }
   addItem(element) {
-    
+    //массив перевернут .reverse() чтобы карточеки отображались в нужном порядке
     this._cards.prepend(element); //вызываемый метод из колбэка (renderer), который добавляет карточки на страницу
   }
   renderItem() {

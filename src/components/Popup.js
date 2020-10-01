@@ -1,8 +1,8 @@
-import { closeModalLook } from "../utils/data.js";
 export class Popup {
-  constructor(modalWindow, modals) {
+  constructor(modalWindow, closeModalLook) {
     this._modalWindow = modalWindow;
-    this._modals = modals;
+    this._closeModalLook = closeModalLook;
+   // console.log(this._closeModalLook);
   }
   open() {
     this._modalWindow.classList.remove("modal_close");
@@ -15,8 +15,12 @@ export class Popup {
     document.removeEventListener("keydown", this._handleEscClose);
   }
   setEventListeners() {
-    closeModalLook.addEventListener("click", this.close.bind(this)); // закрываем по кнопке
-    // закрываем по клику
+    //console.log(closeModalLook);
+    this._closeModalLook.addEventListener("click", this.close.bind(this)); // закрываем по кнопке
+    this._closeModalOnClick();
+  }
+   // закрываем по клику
+   _closeModalOnClick(){
     this._modalWindow.addEventListener("click", (event) => {
       if (
         event.target.classList.contains("modal") ||
@@ -26,8 +30,8 @@ export class Popup {
         this.close();
       }
     });
-  }
-  // закрываем по Esc
+   }
+    // закрываем по Esc
   _handleEscClose=(event) => {
     if (event.key === "Escape") {
       this.close();
