@@ -11,6 +11,7 @@
     padding-right: 15px;
     padding-left: 18px;
     position: absolute;
+    display: none;
 }
 .cards__trash:hover{
     opacity: .6;

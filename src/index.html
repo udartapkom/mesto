@@ -16,13 +16,13 @@
     </header>
     <main class="content">
         <section class="profile">
-            <img class="profile__avatar" src="images/kusto.jpg" alt="Аватар пользователя">
+            <button class="profile__avatar"></button>
             <div class="profile-info">
                 <div class="profile-info__name">
-                    <h1 class="profile-info__title profile-info__title_text_ellipsis">Жак-Ив Кусто</h1>
+                    <h1 class="profile-info__title profile-info__title_text_ellipsis"><!--Жак-Ив Кусто--></h1>
                     <button type="button" class="profile-info__edit-button" aria-label="Редактировать профиль"></button>
                 </div>
-                <p class="profile-info__subtitle profile-info__title_text_ellipsis">Исследователь океана</p>
+                <p class="profile-info__subtitle profile-info__title_text_ellipsis"><!--Исследователь океана--></p>
             </div>
             <button type="button" class="profile__add-button" aria-label="Добавить профиль"></button>
         </section>
@@ -52,11 +52,12 @@
             </form>
         </div>
     </div>
+
     <div class="modal modal_add-card modal_close">
         <div class="modal__content">
             <button type="button" class="modal__close-button modal__close-button_place" aria-label="Закрыть окно"></button>
             <h2 class="modal__header">Новое место</h2>
-            <form name="profile-edit" action="#" class="modal__form" novalidate>
+            <form name="profile-place" action="#" class="modal__form" novalidate>
                 <label class="modal__label">
                     <input name="placeName" type="text" required value="" placeholder="Название"
                         class="modal__input modal__input_name" minlength="1" maxlength="30" autocomplete="off">
@@ -80,13 +81,41 @@
         </div>
     </div>
 
+    <div class="modal modal_avatar modal_close">
+        <div class="modal__content">
+            <button type="button" class="modal__close-button modal__close-button_profile" aria-label="Закрыть окно"></button>
+            <h2 class="modal__header">Обновить аватар</h2>
+            <form name="profile-avatar" action="#" class="modal__form" novalidate>
+                <label class="modal__label">
+                    <input name="placeLink" type="url" required value="" placeholder="Ссылка на аватар"
+                        class="modal__input modal__input_profession" autocomplete="off">
+                    <span class="modal__error_visible" id="placeLink-error"></span>
+                </label>
+                <button type="submit" class="modal__save" disabled>Сохранить</button>
+            </form>
+        </div>
+    </div>
+    <div class="modal modal_delete-card modal_close">
+        <div class="modal__content">
+            <button type="button" class="modal__close-button modal__close-button_profile"
+                aria-label="Закрыть окно"></button>
+            <form name="delete-card-submit" action="#" class="modal__form" novalidate>
+                <h2 class="modal__header">Вы уверены?</h2>
+                <button type="submit" class="modal__save">Да</button>
+            </form>
+        </div>
+    </div>
+
     <template class="template-card">
         <div class="cards">
-            <button type="button" class="cards__trash" aria-label="Удалить"></button>
+           <button type="button" class="cards__trash" aria-label="Удалить"></button>
             <img class="cards__photo" src="#" alt="">
             <div class="cards__title">
                 <h2 class="cards__title-style cards__title_text_ellipsis"></h2>
-                <button type="button" class="cards__like" aria-label="Лайкнуть"></button>
+                <ul class="cards__likes-data">
+                    <li><button type="button" class="cards__like" aria-label="Лайкнуть"></button></li>
+                    <li><p class="cards__likes-quantity"></p></li>
+                </ul>
             </div>
         </div>
     </template>

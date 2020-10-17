@@ -6,7 +6,7 @@ export class PopupWithForm extends Popup {
     this._submitForm = submitForm;
     this._formsObj = formsObj;
     this._submitButton = submitButton;
-  }
+    }
 
   _getInputValues() {
     const inputsList = this._modalWindow.querySelectorAll(this._formsObj.inputSelector);

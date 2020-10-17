@@ -1,16 +1,18 @@
 export class Section {
-  constructor({ items, renderer }, cards) { //renderer - это функция
-    this._items = items;
+  constructor({ renderer }, cards) {
     this._renderer = renderer;
     this._cards = cards;
   }
-  addItem(element) {
-    //массив перевернут .reverse() чтобы карточеки отображались в нужном порядке
-    this._cards.prepend(element); //вызываемый метод из колбэка (renderer), который добавляет карточки на страницу
+  addItem(element, trueFalse) {  //вызываемый метод из колбэка (renderer), который добавляет карточки на страницу
+    if (trueFalse) { // это условие для того, чтобы карточки выстраивались в правильном порядке
+      this._cards.append(element);
+    } else {
+      this._cards.prepend(element);
+    }
   }
-  renderItem() {
-    this._items.forEach((item) => { //перебираем полученный массив
-      this._renderer(item); // отправляем item в колбэк функцию renderer 
+  renderItem(items) {
+    items.forEach((item) => { //перебираем полученный массив
+      this._renderer(item); // отправляем item в колбэк функцию renderer
     });
   }
 }
