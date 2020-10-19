@@ -10,9 +10,9 @@ export class Section {
       this._cards.prepend(element);
     }
   }
-  renderItem(items) {
+  renderItem(items, userID) {
     items.forEach((item) => { //перебираем полученный массив
-      this._renderer(item); // отправляем item в колбэк функцию renderer
+      this._renderer(item, userID); // отправляем item в колбэк функцию renderer
     });
   }
 }

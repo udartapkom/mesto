@@ -1,3 +1,5 @@
+import { submitButton } from "../utils/data";
+
 export class FormValidator {
   constructor(formsObj, modalType) {
     this._formsObj = formsObj;
@@ -8,18 +10,22 @@ export class FormValidator {
     this._modalType.addEventListener("submit", (event) => {
       event.preventDefault();
     });
-    this._findInputs(this._modalType);
+    this._setListeners();
   };
   //ищем все инпуты
   //навешиваем на них слушателей
   //вызываем соответствующую функцию
-  _findInputs = (formElement) => {
-    const inputs = Array.from(formElement.querySelectorAll(this._formsObj.inputSelector));
-    inputs.forEach((inputElement) => {
-        inputElement.addEventListener("input", () => {
-        this._inputValidate(formElement, inputElement); //функция валидации инпутов
-        const isFormValid = inputs.some((inputElement) => !inputElement.validity.valid); // проверим валидность всех инпутов и отправим результат
-        this._buttonValidate(formElement, isFormValid);
+  _inputs = () => {
+    return Array.from(this._modalType.querySelectorAll(this._formsObj.inputSelector));
+  };
+
+  _setListeners = () => {
+    const inputsArray = this._inputs();
+    inputsArray.forEach((inputElement) => {
+      inputElement.addEventListener("input", () => {
+        this._inputValidate(this._modalType, inputElement); //функция валидации инпутов
+        const isFormValid = inputsArray.some((inputElement) => !inputElement.validity.valid); // проверим валидность всех инпутов и отправим результат
+        this._buttonValidate(this._modalType, isFormValid);
       });
     });
   };
@@ -38,24 +44,23 @@ export class FormValidator {
       }
     });
   };
-
-  //добавляем-убираем красную линию в инпут и вызываем функции показа ошибки
+  //вызываем функции показа ошибки
   _inputValidate = (formElement, inputElement) => {
     if (inputElement.validity.valid) {
       this._hideError(formElement, inputElement);
-      inputElement.classList.remove(this._formsObj.inputErrorClass);
     } else {
       this._showError(formElement, inputElement, inputElement.validationMessage);
-      inputElement.classList.add(this._formsObj.inputErrorClass);
     }
   };
   //показать ошибку
   _showError = (formElement, inputElement, errorMessage) => {
+    inputElement.classList.add(this._formsObj.inputErrorClass);
     const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
     errorElement.textContent = errorMessage;
   };
   //убрать ошибку
   _hideError = (formElement, inputElement) => {
+    inputElement.classList.remove(this._formsObj.inputErrorClass);
     const errorElement = formElement.querySelector(`#${inputElement.name}-error`);
     errorElement.textContent = "";
   };
@@ -65,4 +70,13 @@ export class FormValidator {
       event.preventDefault();
     }
   };
+  // Сбрасываем форму в состояние "По умолчанию"
+  resetForm(modalType) {
+    const submitButton = modalType.querySelector(this._formsObj.submitButtonSelector);
+    this._inputs().forEach((inputElement) => {
+      this._hideError(modalType, inputElement);
+    });
+    submitButton.classList.remove(this._formsObj.inactiveButtonClass);
+    submitButton.setAttribute("disabled", "disabled");
+  }
 }

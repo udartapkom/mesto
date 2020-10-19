@@ -33,6 +33,7 @@ export const profileAvatar = document.querySelector(".profile__avatar");
 
 export const saveProfile = modalProfile.querySelector(".modal__form");
 export const saveCard = modalAddCard.querySelector(".modal__form");
+export const saveAvatar = modalAvatar.querySelector(".modal__form");
 export const submitButton = modalAddCard.querySelector(".modal__save");
 
 export const cardsTrashClass = ".cards__trash";
