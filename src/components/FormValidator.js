@@ -72,11 +72,14 @@ export class FormValidator {
   };
   // Сбрасываем форму в состояние "По умолчанию"
   resetForm(modalType) {
-    const submitButton = modalType.querySelector(this._formsObj.submitButtonSelector);
+   // const submitButton = modalType.querySelector(this._formsObj.submitButtonSelector);
     this._inputs().forEach((inputElement) => {
       this._hideError(modalType, inputElement);
     });
-    submitButton.classList.remove(this._formsObj.inactiveButtonClass);
+  }
+  disableSubmit(modalType){
+    const submitButton = modalType.querySelector(this._formsObj.submitButtonSelector);
+    submitButton.classList.add(this._formsObj.inactiveButtonClass);
     submitButton.setAttribute("disabled", "disabled");
   }
 }

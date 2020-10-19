@@ -232,6 +232,7 @@ Promise.all([userInformation, initializeCards])
       avatarValidator.enableValidation();
       saveAvatar.reset();
       avatarValidator.resetForm(modalAvatar);
+      avatarValidator.disableSubmit(modalAvatar);
     });
     //блок добавления карточек
     newCardButton.addEventListener("mouseup", function () {
@@ -241,6 +242,7 @@ Promise.all([userInformation, initializeCards])
       modalTitle.focus();
       saveCard.reset();
       cardValidator.resetForm(modalAddCard);
+      cardValidator.disableSubmit(modalAddCard)
     });
   })
   .catch((error) => {
